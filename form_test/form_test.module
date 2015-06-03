@@ -1,0 +1,48 @@
+<?php
+
+/**
+ * @file
+ * Generates a form from an xml file
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function form_test_menu() {
+  $items['form_test'] = [
+    'title' => 'Form Test',
+    'description' => t('This form was built from an xml file'),
+    'page callback' => 'form_test_view',
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  ];
+  return $items;
+}
+
+/**
+ * Fetches form_test_xmlform.
+ */
+function form_test_view() {
+  module_load_include('inc', 'form_test', 'includes/functions');
+  return drupal_get_form('form_test_xmlform');
+}
+
+/**
+ * Validation function for form_test_xmlform.
+ */
+function form_test_xmlform_validate($form, &$form_state) {
+  die('validate handler called');
+  // Load xml file and check that all required fields have been submitted
+  // no other validation is possible as contents of xml file are variable
+  $data = form_test_load_xml();
+}
+
+/**
+ * Submission function for form_test_xmlform.
+ */
+function form_test_xmlform_submit($form, &$form_state) {
+  die('submit handler called');
+  // Save data to db
+  // Redirect to www.controlnow.com
+  drupal_goto('https://www.controlnow.com/', array('external' => TRUE));
+}

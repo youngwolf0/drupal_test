@@ -1,0 +1,6 @@
+name = Form Test
+description = Builds a form from  a json file.
+core = 7.x
+package = Colin
+
+dependencies[] = clientside_validation_webform
